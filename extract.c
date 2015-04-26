@@ -3,18 +3,37 @@
 #include <stdio.h>
 
 char *extraction(char *command) {
-	char *path;
-	char *pathes = getenv("PATH");
-	int existing; 
-	
-	path = strtok(pathes, ":");
+	int leng;
+	int existing;
+	char *file_path;
+	char *pathes;
+
+	existing = -1;
+	pathes = (char *)malloc(strlen(getenv("PATH"))*sizeof(char));
+	strcpy(pathes, getenv("PATH"));
+
+	char *path = strtok(pathes, ":");
 	while(path = strtok(NULL, ":")) {
-		if(existing = (access(command, R_OK)) != -1) {
-			strcat(path, '/');
-			strcat(path, command);
-			return path;
+		leng = strlen(command) + strlen(path)+1;
+		file_path = (char *)malloc(leng * sizeof(char));
+
+		strncpy(file_path, path, strlen(path)*sizeof(char));
+		strcat(file_path, "/");
+		strcat(file_path, command);
+
+		existing = access(file_path, R_OK);
+		if(existing == 0) {
+			break;
 		}
-	}
 	
-	return NULL;
+	}
+
+	free(pathes);
+
+	if(existing == 0) {
+		return file_path;
+
+	} else {
+		return NULL;
+	}
 }

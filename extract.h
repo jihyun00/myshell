@@ -1,1 +1,1 @@
-char *extraction(char *);
+char *extract(char *);

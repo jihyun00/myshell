@@ -1,6 +1,6 @@
 CC=gcc
 CFLAGS=
-OBJS=mysh.o
+OBJS=mysh.o extract.o
 RUN_NAME=mysh
 
 all: add
@@ -10,6 +10,9 @@ add: $(OBJS)
 
 mysh.o: mysh.c
 	$(CC) $(CFLAGS) -c mysh.c
+
+extract.o: extract.c
+	$(CC) $(CFLAGS) -c extract.c
 
 clean:
 	rm -rf $(RUN_NAME)

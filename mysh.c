@@ -4,7 +4,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
-#include "extraction.h"
+#include "extract.h"
 
 #define BUFSIZE 4096
 #define PATH_MAX 1024
@@ -85,7 +85,7 @@ int main() {
 
 		paramList[i+1] = NULL; //add null pointer
 
-		char *binPath = existing(paramList[0]);
+		char *binPath = extraction(paramList[0]);
 
 		if((pid = fork()) < 0) { //error handling
 			printf("fork error\n");
