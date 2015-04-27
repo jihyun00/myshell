@@ -2,10 +2,29 @@
 #include <unistd.h>
 #include <stdio.h>
 
+#define PATH_MAX 1024
+
+char *getCurrentDir() {
+	char *currentPath = malloc(PATH_MAX);
+	char *currentDir;
+
+	if(getcwd(currentPath, PATH_MAX) == NULL) {
+		printf("getcwd() error\n");
+	}
+
+	char *token = strtok(currentPath, "/");
+	while(token = strtok(NULL, "/")) {
+		currentDir = token;
+	}
+
+	return currentDir;
+}
+
+
 char *extraction(char *command) {
 	int leng;
 	int existing;
-	char *file_path;
+	char *filePath;
 	char *pathes;
 
 	existing = -1;
@@ -15,23 +34,21 @@ char *extraction(char *command) {
 	char *path = strtok(pathes, ":");
 	while(path = strtok(NULL, ":")) {
 		leng = strlen(command) + strlen(path)+1;
-		file_path = (char *)malloc(leng * sizeof(char));
+		filePath = (char *)malloc(leng * sizeof(char));
 
-		strncpy(file_path, path, strlen(path)*sizeof(char));
-		strcat(file_path, "/");
-		strcat(file_path, command);
+		strncpy(filePath, path, strlen(path)*sizeof(char));
+		strcat(filePath, "/");
+		strcat(filePath, command);
 
-		existing = access(file_path, R_OK);
+		existing = access(filePath, R_OK);
 		if(existing == 0) {
 			break;
 		}
 	
 	}
 
-	free(pathes);
-
 	if(existing == 0) {
-		return file_path;
+		return filePath;
 
 	} else {
 		return NULL;
