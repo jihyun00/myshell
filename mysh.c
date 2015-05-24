@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "extract.h"
-#include "myenv.h"
+#include "mycommand.h"
 
 #define BUFSIZE 4096
 #define PATH_MAX 1024
@@ -51,10 +51,12 @@ int main() {
 
 		if(strcmp(paramList[0], "exit") == 0) {
 			exit(0);
-		}
 
-		if(strcmp(paramList[0], "myenv") == 0) {
+		} else if(strcmp(paramList[0], "myenv") == 0) {
 			myenv(index, paramList);
+
+		} else if(strcmp(paramList[0], "mypwd") == 0) {
+			mypwd(index, paramList);
 		}
 
 		/*if(waitpid(pid, &status, bgOption) == -1) {

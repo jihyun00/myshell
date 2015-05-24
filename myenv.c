@@ -13,7 +13,9 @@ void myenv(int size, char **argv) {
 
 	} else { // received command and options
 		if(strcmp(argv[1], "--help") == 0) {
+			printf("myenv command print enviornment variable\n");
 			printf("usage : myenv [name=value]\n");
+			printf("[option] --help : print myenv command usage\n");
 		} else {
 			char *res;
 			res = getenv(argv[1]);
