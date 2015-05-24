@@ -1,6 +1,6 @@
 CC=gcc
 CFLAGS=
-OBJS=mysh.o extract.o myenv.o mypwd.o mycat.o mymkdir.o
+OBJS=mysh.o extract.o myenv.o mypwd.o mycat.o mymkdir.o myrmdir.o
 RUN_NAME=mysh
 
 all: add
@@ -25,6 +25,9 @@ mycat.o: mycat.c
 
 mymkdir.o: mymkdir.c
 	$(CC) $(CFLAGS) -c mymkdir.c
+
+myrmdir.o: myrmdir.c
+	$(CC) $(CFLAGS) -c myrmdir.c
 
 clean:
 	rm -rf $(RUN_NAME)

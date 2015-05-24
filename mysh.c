@@ -63,6 +63,9 @@ int main() {
 
 		} else if(strcmp(paramList[0], "mymkdir") == 0) {
 			mymkdir(index, paramList);
+
+		} else if(strcmp(paramList[0], "myrmdir") == 0) {
+			myrmdir(index, paramList);
 		}
 
 		/*if(waitpid(pid, &status, bgOption) == -1) {

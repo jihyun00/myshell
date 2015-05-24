@@ -4,6 +4,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <string.h>
 
 void mycat(int size, char **argv) {
 	char buf[256];
@@ -14,7 +15,7 @@ void mycat(int size, char **argv) {
 	if(size == 2) {
 		if(strcmp(argv[1], "--help") == 0) {
 			printf("mycat command print files\n");
-			printf("usage : mycat [FILENAME] (option)[NUMBER]\n");
+			printf("usage : mycat [FILENAME] [NUMBER]\n");
 			printf("[option] --help : print mycat command usage\n");
 
 		} else {
@@ -30,6 +31,14 @@ void mycat(int size, char **argv) {
 			printf(": number must bigger than 0\n");
 			return;
 		}
+	} else {
+		int i;
+		for(i = 0; i < size; i++) {
+			printf("%s ", argv[i]);
+		}
+		printf(": You need two or three parameters\n");
+
+		return;
 	}
 
 	fd = open(filename, O_RDONLY);
