@@ -3,17 +3,26 @@
 
 extern char **environ;
 
-void myenv(char **argv) {
-	if(strcmp(argv[0], "")) {
-		int i;
-		char *env = *environ;
+void myenv(int size, char **argv) {
+	if(size == 1) { // received command only
+		int i = 0;
 
-		while(env) {
-			printf("%s\n", env);
-			env = *(environ+i);
-			i++;
+		while(environ[i]) {
+			printf("%s\n", environ[i++]);
 		}
-	} else {	
-		printf("%s\n", getenv(argv[0]));
+
+	} else { // received command and options
+		if(strcmp(argv[1], "--help") == 0) {
+			printf("usage : myenv [name=value]\n");
+		} else {
+			char *res;
+			res = getenv(argv[1]);
+			
+			if(res == NULL) {
+				printf("\n");
+				return;
+			}
+			printf("%s\n", res);
+		}
 	}
 }

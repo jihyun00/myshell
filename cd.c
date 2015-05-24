@@ -15,7 +15,7 @@ void cd(char **argv) {
 			fd = open("./history.txt", O_RWDR);
 		}
 
-		if(strcmp(argv[0], "~") == 0) {
+		if(strcmp(argv[0], "~") == 0) { // TODO : 이거 필요없을지도..
 			char *homePath = getenv("HOME"); //get home path	
 			chdir(homePath);
 		}
