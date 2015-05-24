@@ -28,9 +28,14 @@ void mymkdir(char **argv) {
 			}
 			int i;
 			for(i = 0; i < index-1; i++) {
-				if(access(dir[0], F_OK) == -1) {
-					perror("access");
-					exit(1);
+				if(access(dir[index], F_OK) == -1) {
+					if(i == index) {
+						perror("mkdir");
+						exit(1);
+					}
+
+					continue;
+					
 				} else {
 					mkdir(dir[index]);
 					chdir(dir[index]);
