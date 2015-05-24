@@ -57,6 +57,10 @@ int main() {
 
 		} else if(strcmp(paramList[0], "mypwd") == 0) {
 			mypwd(index, paramList);
+
+		} else if(strcmp(paramList[0], "mycat") == 0) {
+			mycat(index, paramList);
+
 		}
 
 		/*if(waitpid(pid, &status, bgOption) == -1) {
