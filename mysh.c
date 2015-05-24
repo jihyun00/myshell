@@ -61,6 +61,8 @@ int main() {
 		} else if(strcmp(paramList[0], "mycat") == 0) {
 			mycat(index, paramList);
 
+		} else if(strcmp(paramList[0], "mymkdir") == 0) {
+			mymkdir(index, paramList);
 		}
 
 		/*if(waitpid(pid, &status, bgOption) == -1) {

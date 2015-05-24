@@ -30,7 +30,6 @@ void mycat(int size, char **argv) {
 			printf(": number must bigger than 0\n");
 			return;
 		}
-		status = 1;
 	}
 
 	fd = open(filename, O_RDONLY);
@@ -44,6 +43,12 @@ void mycat(int size, char **argv) {
 		return;
 	}
 	n = read(fd, buf, len);
+	if(size == 3) {
+		if(len < strlen(buf)) {
+			status = 1;	
+		}
+	}
+
 	if(n == -1) {
 		int i;
 		for(i = 0; i < size; i++) {

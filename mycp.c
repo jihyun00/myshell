@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void mycp(char **argv) {
+void mycp(int size, char **argv) {
 	int ofd, nfd;
 	int old, new;
 	char buf[256];
 	char *reverse;
 
-	ofd = open(argv[0], O_RDONLY);
+	ofd = open(argv[1], O_RDONLY);
 	if(ofd == -1) {
 		perror("open");
 		exit(1);
