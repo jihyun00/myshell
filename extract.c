@@ -1,21 +1,30 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>
+#include <string.h>
 
 #define PATH_MAX 1024
 
 char *getCurrentDir() {
-	char *currentPath = malloc(PATH_MAX);
+	//char *currentPath = malloc(PATH_MAX);
+	char *currentPath;
 	char *currentDir;
+	char *cwd;
 
 	if(getcwd(currentPath, PATH_MAX) == NULL) {
 		printf("getcwd() error\n");
 	}
 
-	char *token = strtok(currentPath, "/");
+	/*char *token = strtok(currentPath, "/");
+	while(token = strtok(NULL, "/")) {
+		currentDir = token;
+	}*/
+	char *token = strtok(cwd, "/");
 	while(token = strtok(NULL, "/")) {
 		currentDir = token;
 	}
+
+	//free(currentPath);
 
 	return currentDir;
 }

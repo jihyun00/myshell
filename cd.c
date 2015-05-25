@@ -4,8 +4,7 @@
 #include <unistd.h>
 #include <sys/stat.h>
 #include <sys/types.h>
-
-void input(int, char**);
+#include "myinput.h"
 
 void cd(int size, char **argv) {
 	//TODO: move before path
@@ -37,22 +36,15 @@ void cd(int size, char **argv) {
 			num = atoi(argv[2]);
 
 			if(num < 0) {
-				input(size, argv);
+				myinput(size, argv);
 				printf(": Invalid Value\n");
 				return;
 			}
 
 		} else {
-			input(size, argv);
+			myinput(size, argv);
 			printf(": Invalid Option\n");
 			return;
 		}
-	}
-}
-
-void input(int s, char **in) {
-	int i;
-	for(i = 0; i < s; i++) {
-		printf("%s ", in[i]);
 	}
 }

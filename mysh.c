@@ -5,13 +5,21 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
+#include <signal.h>
 #include "extract.h"
 #include "mycommand.h"
+#include "myinput.h"
 
 #define BUFSIZE 4096
 #define PATH_MAX 1024
 
+void handler(int);
+
 int main() {
+	if(signal(SIGQUIT, handler) == SIG_ERR) {
+		printf("signal occurs error\n");
+	}
+
 	while(1) {
 		pid_t pid;
 		int status;
@@ -23,10 +31,20 @@ int main() {
 		char *fileName;
 		int fd;
 
-		char *currentDir = getCurrentDir();
+		char *currentDir; //get current directory
+		char *cwd = getcwd(NULL, PATH_MAX);
+		char *dirToken = strtok(cwd, "/");
+		while(dirToken = strtok(NULL, "/")) {
+			currentDir = dirToken;
+		}
 
 		printf("[20122301 %s]$ ", currentDir);
 		fgets(buf, BUFSIZE, stdin);
+
+		if(feof(stdin)) { // when received EOF(ctrl+D)
+			printf("Bye Bye~\n");
+			return 0;
+		}
 
 		if(strlen(buf) != 1) {
 			buf[strlen(buf)-1] = '\0'; //remove \n
@@ -40,7 +58,7 @@ int main() {
 			buf[final]= '\0';
 		}
 
-		char **paramList;
+		char *paramList[BUFSIZE];
 		int index = 0;
 
 		token = strtok(buf, " ");
@@ -49,7 +67,8 @@ int main() {
 			token = strtok(NULL, " ");
 		}
 
-		if(strcmp(paramList[0], "exit") == 0) { //TODO: ERROR
+		if(strcmp(paramList[0], "exit") == 0) {
+			printf("Bye Bye~\n");
 			return 0;
 
 		} else if(strcmp(paramList[0], "myenv") == 0) {
@@ -78,18 +97,28 @@ int main() {
 
 		} else if(strcmp(paramList[0], "myrm") == 0) {
 			myrm(index, paramList);
+
+		} else {
+			myinput(index, paramList);
+			printf(": Invalid option\n");
 		}
+
+		pid = getpid();
 
 		/*if(waitpid(pid, &status, bgOption) == -1) {
 				printf("wait error\n");
 				exit(1);
-			} else {
-				if(bgOption == WNOHANG) {
-					printf("[1] %d\n" ,pid);
-				}
+		} else {
+			if(bgOption == WNOHANG) {
+				printf("[1] %d\n" ,pid);
 			}
 		}*/
 	}
 
 	return 0;
+}
+
+void handler(int signo) {
+	printf("Bye Bye~\n");
+	kill(getpid(), SIGTERM);
 }

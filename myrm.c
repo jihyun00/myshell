@@ -3,8 +3,7 @@
 #include <unistd.h>
 #include <errno.h>
 #include <string.h>
-
-void input(int s, char **in);
+#include "myinput.h"
 
 void myrm(int size, char **argv) {
 	if(size == 2) {
@@ -19,7 +18,7 @@ void myrm(int size, char **argv) {
 
 			err = unlink(argv[1]);
 			if(err == -1) {
-				input(size, argv);
+				myinput(size, argv);
 				printf(": %s\n", strerror(errno));
 
 				return;
@@ -29,17 +28,10 @@ void myrm(int size, char **argv) {
 		if(strcmp(argv[1], "-rf") == 0) {
 
 		} else {
-			input(size, argv);
+			myinput(size, argv);
 			printf(": Invalid option\n");
 
 			return;
 		}
-	}
-}
-
-void input(int s, char **in) {
-	int i;
-	for(i = 0; i < s; i++) {
-		printf("%s ", in[i]);
 	}
 }
