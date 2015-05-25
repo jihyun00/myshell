@@ -13,6 +13,8 @@ void myrmdir(int size, char **argv) {
 			printf("usage : myrmdir [FILENAME]\n");
 			printf("[option] --help : print myrmdir command usage\n");
 
+			return;
+
 		} else {
 			err = rmdir(argv[1]);	
 			if(err == -1) {

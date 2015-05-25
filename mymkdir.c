@@ -17,6 +17,8 @@ void mymkdir(int size, char **argv) {
 			printf("mymkdir command make directories\n");
 			printf("usage : mymkdir [-p] [DIRECTORY]\n");
 			printf("[option] --help : print mymkdir command usage\n\t-p : create directory as required\n");
+
+			return;
 		} else {
 			dirname = argv[1];
 			char *find = strchr(dirname, '/');

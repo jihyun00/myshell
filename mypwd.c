@@ -14,6 +14,9 @@ void mypwd(int size, char **argv) {
 		if(strcmp(argv[1], "--help") == 0) {
 			printf("mypwd print current working directory\nmypwd : usage : mypwd\n");
 			printf("[option] --help : print mypwd command usage\n");
+
+			return;
+
 		} else {
 			int i;
 			for(i = 0; i < size; i++) {

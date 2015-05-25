@@ -33,6 +33,9 @@ void myls(int size, char **argv) {
 			printf("myls command list directory comtents\n");
 			printf("usage : myls [-l] [filename]\n");
 			printf("[option] --help : print myls command usage\n\t-l : print detail contents of list directory contents\n");
+
+			return;
+			
 		} else if(strcmp(argv[1], "-l") == 0) {
 			while((dent = readdir(dp)) != NULL) {
 				if(strcmp(dent->d_name, "..") == 0) {

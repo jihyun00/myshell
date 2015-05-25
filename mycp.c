@@ -16,9 +16,20 @@ void mycp(int size, char **argv) {
 
 	if(size == 2) {
 		if(strcmp(argv[1], "--help") == 0) {
-			// USAGE		
+			printf("mycp command copy file to destination file\n");
+			printf("usage : mycp [-reverse] [FILENAME] [FILENAME]\n");
+			printf("[option] --help : print mycp command usage.\n\t-reverse : copy file reverse\n");
+
+			return;
 		} else {
-			// invalid command
+			int i;
+			for(i = 0; i < size; i++) {
+				printf("%s ", argv[i]);
+			}
+
+			printf(": Invalid option\n");
+
+			return;
 		}
 	} else if(size == 3) {
 		source = argv[1];
@@ -29,17 +40,34 @@ void mycp(int size, char **argv) {
 		dest = argv[3];
 
 	} else {
-		// ERROR
+		int i;
+		for(i = 0; i < size; i++) {
+			printf("%s ", argv[i]);
+		}
+
+		printf(": Invalid option\n");
+
+		return;
 	} 
 
 	ofd = open(source, O_RDONLY);
 	if(ofd == -1) {
-		perror("open");
+		int i;
+		for(i = 0; i < size; i++) {
+			printf("%s ", argv[i]);
+		}
+
+		printf(": cannot open file\n");
 		return;
 	}
 	old = read(ofd, buf, sizeof(buf));
 	if(old == -1) {
-		perror("read");
+		int i;
+		for(i = 0; i < size; i++) {
+			printf("%s ", argv[i]);
+		}
+
+		printf(": cannot read file\n");
 		return;
 	}
 	buf[old] = '\0';
@@ -55,7 +83,13 @@ void mycp(int size, char **argv) {
 			printf("%s\n", reverse);
 			strcpy(buf, reverse);
 		} else {
-			// ERROR
+			int i;
+			for(i = 0; i < size; i++) {
+				printf("%s ", argv[i]);
+			}
+
+			printf(": Invalid option\n");
+			return;
 		}
 	}
 
@@ -66,12 +100,22 @@ void mycp(int size, char **argv) {
 		nfd = open(dest, O_WRONLY | O_TRUNC);
 	}
 	if(nfd == -1) {
-		perror("open");
+		int i;
+		for(i = 0; i < size; i++) {
+			printf("%s ", argv[i]);
+		}
+
+		printf(": cannot open file\n");
 		return;
 	}
 
 	if(write(nfd, buf, strlen(buf)) != strlen(buf)) {
-		perror("write");
+		int i;
+		for(i = 0; i < size; i++) {
+			printf("%s ", argv[i]);
+		}
+
+		printf(": cannot read file\n");
 		return;
 	}
 

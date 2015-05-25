@@ -18,6 +18,8 @@ void mycat(int size, char **argv) {
 			printf("usage : mycat [FILENAME] [NUMBER]\n");
 			printf("[option] --help : print mycat command usage\n");
 
+			return;
+
 		} else {
 			len = sizeof(buf);
 		}
