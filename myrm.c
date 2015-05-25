@@ -4,19 +4,39 @@
 #include <errno.h>
 #include <string.h>
 
-void myrm(char **argv) {
-	int err;
+void input(int s, char **in);
 
-	if(sizeof(argv) == 1) {
-		err = unlink(argv[0]);
-		if(err == -1) {
-			printf("%s\n", strerror(errno));
+void myrm(int size, char **argv) {
+	if(size == 2) {
+		if(strcmp(argv[1], "--help") == 0) {
+
+			return;
+		} else {
+			int err;
+
+			err = unlink(argv[1]);
+			if(err == -1) {
+				input(size, argv);
+				printf(": %s\n", strerror(errno));
+
+				return;
+			}
 		}
+	} else if(size == 3) {
+		if(strcmp(argv[1], "-rf") == 0) {
 
-	} else if(sizeof(argv) == 2) {
+		} else {
+			input(size, argv);
+			//TODO: ERROR
 
-	} else {
-		// ERROR
+			return;
+		}
 	}
+}
 
+void input(int s, char **in) {
+	int i;
+	for(i = 0; i < s; i++) {
+		printf("%s ", in[i]);
+	}
 }

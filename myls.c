@@ -8,6 +8,9 @@
 #include <grp.h>
 #include <time.h>
 
+
+void detail(char *filename);
+
 void myls(int size, char **argv) {
 	struct dirent *dent;
 	DIR *dp;

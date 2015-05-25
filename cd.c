@@ -1,31 +1,34 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
+#include <string.h>
 #include <fcntl.h>
+#include <unistd.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 
-void cd(char **argv) {
+void cd(int size, char **argv) {
 	//TODO: move before path
-	if(sizeof(argv) == 1) {
+	if(size == 2) {
 		int fd, n;
 		char *buf, *token, *content;
 
-		if(access(dir[index], F_OK) == -1) {
-			fd = open("./history.txt", O_CREAT | O_RWDR);
+		int index = 0;
+		if(access("./history.txt", F_OK) == -1) {
+			fd = open("./history.txt", O_CREAT | O_RDWR);
 		} else {
-			fd = open("./history.txt", O_RWDR);
+			fd = open("./history.txt", O_RDWR);
 		}
 
-		if(strcmp(argv[0], "~") == 0) { // TODO : 이거 필요없을지도..
+		if(strcmp(argv[1], "~") == 0) {
 			char *homePath = getenv("HOME"); //get home path	
 			chdir(homePath);
 		}
 
-		chdir(argv[0]);
+		chdir(argv[1]);
 
 		n = read(fd, content, sizeof(content));
 		if(n == -1) {
 			perror("read");
-			exit(1);
+			return;
 		}
 		content[n] = '\0';
 
@@ -39,17 +42,17 @@ void cd(char **argv) {
 			return;
 		}
 
-		sprintf(buf, "/%s", argv[0]);
+		sprintf(buf, "/%s", argv[1]);
 
 		if(write(fd, buf, sizeof(buf)) != sizeof(buf)) {
 			perror("write");
 			return;
 		}
 
-	} else if(sizeof(argv) == 2) {
-		if(strcmp(argv[0], "-b")== 0) {
+	} else if(size == 3) {
+		if(strcmp(argv[1], "-b")== 0) {
 			int i, num;
-			num = atoi(argv[1]);
+			num = atoi(argv[2]);
 
 			if(num < 0) {
 				printf("Invalid Value\n");

@@ -55,6 +55,9 @@ int main() {
 		} else if(strcmp(paramList[0], "myenv") == 0) {
 			myenv(index, paramList);
 
+		} else if(strcmp(paramList[0], "cd") == 0) {
+			cd(index, paramList);
+
 		} else if(strcmp(paramList[0], "mypwd") == 0) {
 			mypwd(index, paramList);
 
@@ -72,6 +75,9 @@ int main() {
 
 		} else if(strcmp(paramList[0], "myrmdir") == 0) {
 			myrmdir(index, paramList);
+
+		} else if(strcmp(paramList[0], "myrm") == 0) {
+			myrm(index, paramList);
 		}
 
 		/*if(waitpid(pid, &status, bgOption) == -1) {
