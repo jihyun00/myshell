@@ -9,6 +9,9 @@ void input(int s, char **in);
 void myrm(int size, char **argv) {
 	if(size == 2) {
 		if(strcmp(argv[1], "--help") == 0) {
+			printf("myrm command delete file\n");
+			printf("usage : myrm [-rf] [FILENAME]\n");
+			printf("[option] -- help : print myrm command usage\n\t-rf : delete file or directory forcely\n");
 
 			return;
 		} else {
@@ -27,7 +30,7 @@ void myrm(int size, char **argv) {
 
 		} else {
 			input(size, argv);
-			//TODO: ERROR
+			printf(": Invalid option\n");
 
 			return;
 		}
