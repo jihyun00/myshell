@@ -49,8 +49,8 @@ int main() {
 			token = strtok(NULL, " ");
 		}
 
-		if(strcmp(paramList[0], "exit") == 0) {
-			exit(0);
+		if(strcmp(paramList[0], "exit") == 0) { //TODO: ERROR
+			return 0;
 
 		} else if(strcmp(paramList[0], "myenv") == 0) {
 			myenv(index, paramList);
@@ -58,8 +58,14 @@ int main() {
 		} else if(strcmp(paramList[0], "mypwd") == 0) {
 			mypwd(index, paramList);
 
+		} else if(strcmp(paramList[0], "myls") == 0) {
+			myls(index, paramList);
+
 		} else if(strcmp(paramList[0], "mycat") == 0) {
 			mycat(index, paramList);
+
+		} else if(strcmp(paramList[0], "mycp") == 0) {
+			mycp(index, paramList);
 
 		} else if(strcmp(paramList[0], "mymkdir") == 0) {
 			mymkdir(index, paramList);
