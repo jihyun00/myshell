@@ -46,6 +46,8 @@ int main() {
 			return 0;
 		}
 
+		printf("getenv : %s\n", getenv("PATH"));
+
 		if(strlen(buf) != 1) {
 			buf[strlen(buf)-1] = '\0'; //remove \n
 		} else { //when I received enter, ignore it.
